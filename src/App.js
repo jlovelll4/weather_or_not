@@ -25,12 +25,10 @@ class App extends React.Component {
         </video>
         <Header />
         <Navbar />
-        {/* <Routes> */}
               <WeatherList
                 path="/"
                 render={routerProps => <WeatherList {...routerProps} />}
               />
-        {/* </Routes> */}
         <LocationForm />
         <Footer />
       </div>

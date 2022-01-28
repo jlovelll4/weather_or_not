@@ -1,6 +1,7 @@
 import React from "react";
 import { withWeather } from "../context/WeatherProvider";
 import "../style.css";
+import Button from "../styled_components/Button";
 
 class LocationForm extends React.Component {
   constructor() {
@@ -30,10 +31,11 @@ class LocationForm extends React.Component {
         <form onSubmit={this.handleSubmit} id="form">
           <input
             placeholder="City"
-            defaultValue="Pinson"
+            defaultValue="Huntsville"
             name="city"
             onChange={this.onChange}
             type="text"
+            color={"blue"}
           />
           <input
             placeholder="State"
@@ -42,7 +44,8 @@ class LocationForm extends React.Component {
             onChange={this.onChange}
             type="text"
           />
-          <button className="button">Get Weather</button>
+          <Button>Get Weather</Button>
+          {/*<button className="button">Get Weather</button>*/}
         </form>
       </div>
     );

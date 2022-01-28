@@ -60,6 +60,7 @@ class WeatherProvider extends Component {
       .tz(this.state.forecast.timezone)
       .format(format);
   };
+
   convertBearing = b => {
     // eslint-disable-next-line no-extend-native
     Number.prototype.between = function(first, last) {
@@ -129,6 +130,7 @@ class WeatherProvider extends Component {
           getCoords: this.getCoords,
           convertTime: this.convertTime,
           convertBearing: this.convertBearing,
+          timezone: this.state.forecast.timezone,
           st8: this.state.st8,
           city: this.state.city,
           currently: this.state.forecast.currently,
