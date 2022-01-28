@@ -1,76 +1,79 @@
 // const Skycons = require('react-skycons');
 import React from "react";
-import Skycons from "react-skycons";
-
-import { withWeather } from "../context/WeatherProvider";
+import Skycons, {SkyconsType} from "react-skycons";
+import {withWeather} from "../context/WeatherProvider";
 import "../style.css";
 
 class CurrentConditionsDisplay extends React.Component {
-  render() {
-    const icon = this.props.currently.icon.replace(/-/g, "_").toUpperCase();
+    render() {
 
-    if (this.props.currently) {
-      return (
-        <div className="display-container scroll">
-          <span className="h3">Current Conditions</span>
-          {this.props.convertTime(this.props.currently.time, "HH:MM")}
-          <div>
-            <hr />
-          </div>
-          <Skycons
-            style={{ height: "4em", width: "6em" }}
-            color="white"
-            icon={icon}
-            autoplay={true}
-          />
-          {this.props.currently.summary}
-          <div>
-            <hr />
-          </div>
-          <span>
-            {Math.round(this.props.currently.temperature)}℉ | {""}
-            {Math.round(this.props.currently.apparentTemperature)}℉ (Feels Like)
+        const icon = this.props.currently.icon.replace(/-/g, "_").toUpperCase();
+        if (this.props.currently) {
+            return (
+                <section className="current-data-container">
+
+                    <div className="current-data-item">
+                        <Skycons
+                            // style={{ height: "4em", width: "6em" }}
+                            color="white"
+                            size={80}
+                            resizeClear={false}
+                            animate={true}
+                            type={icon}/>
+                        {this.props.currently.summary}
+                        <span className="current-data-item-temp">
+            {Math.round(this.props.currently.temperature)}
           </span>
-          <div>
-            <hr />
-          </div>
-          Humidity: {Math.round(this.props.currently.humidity * 100)}%
-          <div>
-            <hr />
-          </div>
-          Precip: {this.props.currently.precipProbability * 100}%
-          <div>
-            <hr />
-          </div>
-          <span>
-            {this.props.currently.windSpeed} mph |
-            {this.props.convertBearing(this.props.currently.windBearing)} |
-            {this.props.currently.windGust} mph (gust)
+                        <div>
+                            Feels Like: {" "}
+                            <span className="current-data-item-feels-like">
+              {Math.round(this.props.currently.apparentTemperature)}
+            </span>
+                        </div>
+                        <div>
+                            Humidity: {" "}
+                            <span className="current-data-item-humidity">
+                 {Math.round(this.props.currently.humidity * 100)}%
+            </span>
+                        </div>
+
+                        <div>Precip: {" "}
+
+                            <span className="current-data-item-precip">{this.props.currently.precipProbability * 100}%</span>
+                        </div>
+                        <div>
+                  <span className="current-data-item-wind-speed">
+            {Math.round(this.props.currently.windSpeed)} mph | {" "}
+                      {this.props.convertBearing(this.props.currently.windBearing)} | {" "}
+                      {Math.round(this.props.currently.windGust)} mph (gust)
           </span>
-          <div>
-            <hr />
-          </div>
-          <span>Dew Pt: {Math.round(this.props.currently.dewPoint)}°</span>
-          <div>
-            <hr />
-          </div>
-          Pressure: {Math.round(this.props.currently.pressure)}mb
-          <div>
-            <hr />
-          </div>
-          UV Index: {this.props.currently.uvIndex}
-          <div>
-            <hr />
-          </div>
-        </div>
-      );
-    } else {
-      return (
-        <div>
-          <h1>No data to display.</h1>
-        </div>
-      );
+                        </div>
+                        <div>Dew Pt: {" "}
+                            <span>
+                 {Math.round(this.props.currently.dewPoint)}°
+            </span>
+                        </div>
+
+                        <div>
+                            Pressure: {" "}
+                            <span>{Math.round(this.props.currently.pressure)}</span>
+                            mb {" "}
+                        </div>
+                            <div>
+                                UV Index: {" "}
+                                <span>{this.props.currently.uvIndex}</span>
+                            </div>
+                    </div>
+                </section>
+            );
+        } else {
+            return (
+                <div>
+                    <h1>No data to display.</h1>
+                </div>
+            );
+        }
     }
-  }
 }
+
 export default withWeather(CurrentConditionsDisplay);
